@@ -1,0 +1,23 @@
+{
+  "name": "sync-national-congress-br",
+  "version": "1.0.0",
+  "description": "Sync data from National Congress of Brazil",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/quem-elegeu/sync-national-congress-br.git"
+  },
+  "author": "daniel.joppi@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/quem-elegeu/sync-national-congress-br/issues"
+  },
+  "homepage": "https://github.com/quem-elegeu/sync-national-congress-br#readme",
+  "dependencies": {
+    "jsdom": "^8.4.1",
+    "request": "^2.72.0"
+  }
+}
