@@ -15,7 +15,7 @@ downloadHTML(urlList).then(html => {
     console.log('Find total: ', list.length);
     let promise = Promise.resolve();
     for (let i=0, len = list.length; i<len; i++) {
-    //for (let i=0, len = 3; i<len; i++) {
+    //for (let i=0, len = 10; i<len; i++) {
         let person = list[i];
         promise = promise.then(() => {
             let urlDetail = `${$baseUrl}/${person.links.details}`;
