@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/quem-elegeu/sync-national-congress-br#readme",
   "dependencies": {
+    "jquery": "^2.2.3",
     "jsdom": "^8.4.1",
     "request": "^2.72.0"
   }
