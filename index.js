@@ -14,8 +14,8 @@ downloadHTML(urlList).then(html => {
 }).then(list => {
     console.log('Find total: ', list.length);
     let promise = Promise.resolve();
-    //for (let i=0, len = list.length; i<len; i++) {
-    for (let i=0, len = 3; i<len; i++) {
+    for (let i=0, len = list.length; i<len; i++) {
+    //for (let i=0, len = 3; i<len; i++) {
         let person = list[i];
         promise = promise.then(() => {
             let urlDetail = `${$baseUrl}/${person.links.details}`;
@@ -23,6 +23,7 @@ downloadHTML(urlList).then(html => {
                 .then(html => parseHTMLPerson(html, person))
                 .then(() => {
                     if (!person.links.biography) return;
+                    console.log('Get biography of', person.shortName || person.fullName);
                     return downloadHTML(person.links.biography)
                 })
                 .then(html => parseHTMLBiography(html, person))

@@ -1,12 +1,36 @@
 'use strict';
 
+const $RE_SPAN = /<span>([^<]*)<\/span>/i;
 const $RE_STRONG = /<strong>([^<]*)<\/strong>/i;
 module.exports = (elem, person) => {
     let data = elem.find('.bioFotoDetalhes .bioDetalhes').html().trim().split('<br>');
-    person.birthday = data[1].match($RE_STRONG)[1];
-    person.bornForm = data[2].match($RE_STRONG)[1];
-    person.jobTitle = data[3].match($RE_STRONG)[1];
-    person.degree = data[4].match($RE_STRONG)[1];
+    data.forEach(info => {
+        let span = info.match($RE_SPAN),
+            str = info.match($RE_STRONG);
+        if (!str || !str[1]) return;
+        let lbl = span && span[1].toLowerCase() || '',
+            val = str[1].trim().replace('\\n', '');
+        if (!lbl) {
+            person.fullName = val;
+        } else if (~lbl.indexOf('nascimento')) {
+            let dd = val.split('/');
+            person.birthday = {
+                day: dd[0],
+                month: dd[1],
+                year: dd[2]
+            };
+        } else if (~lbl.indexOf('natural')) {
+            person.bornForm = val;
+        } else if (~lbl.indexOf('profiss')) {
+            person.jobTitle = val;
+        } else if (~lbl.indexOf('filia')) {
+            person.family = val;
+        } else if (~lbl.indexOf('escola')) {
+            person.degree = val;
+        } else {
+            console.log('Data Not Mapped:', span);
+        }
+    });
 
     person.history = {};
     person.activities = {};
