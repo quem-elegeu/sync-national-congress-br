@@ -3,7 +3,6 @@ const jsdom = require('jsdom');
 const $defaults = require('../defaults');
 
 module.exports = (html, person) => new Promise(resolve => {
-    if (!person) person = {};
     jsdom.env({
         html,
         src: [$defaults.jquery],
@@ -11,10 +10,13 @@ module.exports = (html, person) => new Promise(resolve => {
             let $ = window.jQuery,
                 content = $('#content');
 
+            const RE_PHONE = /(\(\d\d\) \d\d\d\d-\d\d\d\d)/;
+            const RE_GENDER = /Deputada/;
             $('.clearedBox', content).each(function (i) {
                 let elem = $(this);
                 if (i == 0) {
                     person.image = elem.find('.image-left').attr('src');
+                    person.gender = RE_GENDER.test(elem.find('h3.documentFirstHeading').text()) ? 'F' : 'M';
                     let lis = elem.find('.visualNoMarker li');
                     lis.each(function (i) {
                         let elem = $(this),
@@ -28,6 +30,8 @@ module.exports = (html, person) => new Promise(resolve => {
                             person.links.biography = elem.find('a').attr('href');
                         } else if (i == 6) {
                             person.links.talkTo = elem.find('a').attr('href');
+                        } else if (RE_PHONE.test(val.trim())) {
+                            person.phone = RE_PHONE.exec(val.trim())[1]
                         }
                     });
                 }

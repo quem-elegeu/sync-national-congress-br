@@ -55,7 +55,7 @@ module.exports = (elem, person) => {
                 } else if (~atitle.indexOf('relatadas')) {
                     person.links.propsSpeaked = link.attr('href');
                 } else if (~oElem.text().indexOf('(Legislaturas)')) {
-                    elemDiv.find('a').each(() => {
+                    elemDiv.find('a').each(function() {
                         let n = elemDiv.find(this).text().trim();
                         if (!~person.legislation.indexOf(n)) {
                             person.legislation.push(n);
@@ -66,7 +66,8 @@ module.exports = (elem, person) => {
                 }
             });
         } else if (title.startsWith('mandatos') && ~title.indexOf('deputados')) {
-            person.history.congress = text.text().trim().replace(/\n/g, '').split(/;\s*/);
+            let val = text.text().trim().replace(/\n/g, '').split(/;\s*/);
+            person.history.congress = val.map(o => o.split(/\s*,\s*/));
         } else if (title.startsWith('mandatos') && ~title.indexOf('externos')) {
             person.history.external = text.text().trim().replace(/\n/g, '').split(/;\s*/);
         } else if (title.startsWith('filia')) {

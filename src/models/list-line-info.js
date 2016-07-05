@@ -19,7 +19,7 @@ module.exports = (elem, person) => {
                 party = infos[0].split(':')[1],
                 sparty = party.split('/'),
                 fone = infos[3].split(':')[1].replace(/ /g, '');
-            person.party = sparty[0].replace(' ', '');
+            person.party = sparty[0].trim();//.replace(' ', '');
             person.state = sparty[1].replace(' ', '');
             person.phone = fone + '-' + infos[4];
         } else if (i == 2) {
