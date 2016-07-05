@@ -4,7 +4,7 @@ const $defaults = require('../defaults');
 
 const bioInfo = require('../models/biography-info');
 
-module.exports = (html, person) => new Promise(resolve => {
+module.exports = (html, person = {}) => new Promise(resolve => {
     jsdom.env({
         html,
         src: [$defaults.jquery],

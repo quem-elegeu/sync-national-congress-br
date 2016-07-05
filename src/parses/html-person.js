@@ -2,7 +2,7 @@
 const jsdom = require('jsdom');
 const $defaults = require('../defaults');
 
-module.exports = (html, person) => new Promise(resolve => {
+module.exports = (html, person = {}) => new Promise(resolve => {
     jsdom.env({
         html,
         src: [$defaults.jquery],
