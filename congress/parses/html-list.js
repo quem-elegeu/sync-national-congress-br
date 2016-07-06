@@ -1,6 +1,6 @@
 'use strict';
 const jsdom = require('jsdom');
-const $defaults = require('../defaults');
+const $defaults = require('../../utils/defaults');
 const lineInfo = require('../models/list-line-info');
 
 module.exports = (html) => new Promise(resolve => {

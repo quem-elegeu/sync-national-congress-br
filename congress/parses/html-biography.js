@@ -1,6 +1,6 @@
 'use strict';
 const jsdom = require('jsdom');
-const $defaults = require('../defaults');
+const $defaults = require('../../utils/defaults');
 
 const bioInfo = require('../models/biography-info');
 

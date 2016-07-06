@@ -1,6 +1,6 @@
 'use strict';
 const jsdom = require('jsdom');
-const $defaults = require('../defaults');
+const $defaults = require('../../utils/defaults');
 
 module.exports = (html, person = {}) => new Promise(resolve => {
     jsdom.env({
@@ -32,6 +32,16 @@ module.exports = (html, person = {}) => new Promise(resolve => {
                             person.links.talkTo = elem.find('a').attr('href');
                         } else if (RE_PHONE.test(val.trim())) {
                             person.phone = RE_PHONE.exec(val.trim())[1]
+                        }
+                    });
+                } else if (i === 1) {
+                    let lis = elem.find('.visualNoMarker li');
+                    lis.each(function (i) {
+                        let elem = $(this),
+                            txt = elem.text().split(':'),
+                            val = txt[1];
+                        if (i == 1 && val) {
+                            person.cabinet = val.trim();
                         }
                     });
                 }
