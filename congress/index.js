@@ -30,7 +30,7 @@ module.exports = () => downloadHTML(urlList).then(html => {
                 })
                 .then(([person, html]) => parseHTMLBiography(html, person))
                 .then(person => {
-                    console.log('Concluded download of ', person.shortName || person.fullName);
+                    console.log('Concluded download of Congress:', person.shortName || person.fullName);
                     return persons[i] = person;
                 });
         };

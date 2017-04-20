@@ -35,6 +35,8 @@ module.exports = (html) => new Promise(resolve => {
                         person.phone = val.trim();
                     } else if (i == 6) {
                         person.email = val.trim();
+                        person.gender = ~person.email.indexOf('senadora') ? 'F' : 'M';
+
                     }
                 });
                 if (li.length) {
